@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on WonderLand</title>
+    <link>/post/</link>
+    <description>Recent content in Posts on WonderLand</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 23 Apr 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>KbarStrategy</title>
+      <link>/2019/04/23/kbarstrategy/</link>
+      <pubDate>Tue, 23 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/04/23/kbarstrategy/</guid>
+      <description>前言市面上教K線的書多而又多，常常看到專家們指著某個型態就說這一定會漲，但到底是根據甚麼呢？
+其實K線不外乎就是由四個簡單的要素所組成：開盤價、最高價、最低價、收盤價，是反映價格走勢的一種圖線，藉由歷史的價格統計資料期許能預測行情走勢，而因其簡單易懂的特性，被廣泛應用在股票、期貨、貴金屬、數字貨幣等分析。
+
+K棒交易策略K線當收盤價&amp;gt;開盤價，我們稱為紅K(陽線)；當收盤價&amp;lt;開盤價，我們稱為黑K(陰線) 每一K線皆由「實體」和「影線」兩部份組成，實體比影線粗，影線依附於實體的上下兩端。其中實體部份記錄當天的開盤價和收盤價，影線部份則記錄當天的最高價和最低價。
+影線又分為「上影線」和「下影線」兩種，以陽線為例，陽線的上影線表示最高價和收盤價的差距，下影線表示最低價和開盤價的差距，陰線之上下影線則以此類推。
+K棒組合以兩根或多根K棒組合做為股票進場的交易策略【多頭訊號】
+【空頭訊號】
+長紅吞噬回測實作在投資領域中，技術分析線圖上常出現長紅吞噬的K棒組合，有些投資人認為這代表該檔股票未來會有一波多頭的走勢，原因是在第t天時一根紅K棒回補了前一天所有的損失，常被視為是股價要反轉的跡象。在這篇文章中，將以台灣上市公司的歷史股價資料，示範如何以R軟體來回測驗證這個交易想法。
+若回測的交易日出現常紅吞噬的K棒組合，則以隔日的開盤價進場，出場則是定在買進後任一時點損失超過10%時移動停損，以跌破當日的收盤價作為停損出場。
+判斷長紅吞噬K棒組合策略進場位置進階應用使用機器學習模型進行擇時交易策略提升策略績效加入基本面因素篩股參考講義技術分析概論智能理財分析</description>
+    </item>
+    
+    <item>
+      <title>Markdown Cheat Sheet</title>
+      <link>/2017/05/20/markdown-cheat-sheet/</link>
+      <pubDate>Sat, 20 May 2017 12:10:51 +0200</pubDate>
+      
+      <guid>/2017/05/20/markdown-cheat-sheet/</guid>
+      <description>&lt;p&gt;This note demonstrates some of what &lt;a href=&#34;http://daringfireball.net/projects/markdown/&#34;&gt;Markdown&lt;/a&gt; is capable of doing.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: Feel free to play with this page. Unlike regular notes, this doesn&amp;rsquo;t automatically save itself.&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Using the gallery shortcode</title>
+      <link>/2017/05/20/using-the-gallery-shortcode/</link>
+      <pubDate>Sat, 20 May 2017 12:00:23 +0200</pubDate>
+      
+      <guid>/2017/05/20/using-the-gallery-shortcode/</guid>
+      <description>&lt;p&gt;This way you can easily include a gallery into your page. Copy the code below into your content file and enter the relative paths to your images.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Formulas with MathJax</title>
+      <link>/2017/05/20/formulas-with-mathjax/</link>
+      <pubDate>Sat, 20 May 2017 11:58:06 +0200</pubDate>
+      
+      <guid>/2017/05/20/formulas-with-mathjax/</guid>
+      <description>&lt;p&gt;Mathematical equations in form of LaTeX or MathML code can be rendered with the support of &lt;a href=&#34;https://www.mathjax.org&#34;&gt;MathJax&lt;/a&gt;. MathML works out of the box. If you&amp;rsquo;re using LaTeX you need to wrap your equation with &lt;code&gt;$$&lt;/code&gt; as shown in the following example:&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>How to add pages to the menu</title>
+      <link>/2015/10/02/how-to-add-pages-to-the-menu/</link>
+      <pubDate>Fri, 02 Oct 2015 21:49:20 +0200</pubDate>
+      
+      <guid>/2015/10/02/how-to-add-pages-to-the-menu/</guid>
+      <description>I&amp;rsquo;m a linked post in the menu. You can add other posts by adding the following line to the frontmatter:
+menu = &amp;quot;main&amp;quot;  </description>
+    </item>
+    
+    <item>
+      <title>Hello R Markdown</title>
+      <link>/2015/07/23/hello-r-markdown/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>/2015/07/23/hello-r-markdown/</guid>
+      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+You can embed an R code chunk like this:
+summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,15 +1,15 @@
 ---
-title: KbarStrategy
+title: K棒交易策略介紹
 author: Quant777 Bill
 date: '2019-04-23'
 slug: kbarstrategy
 categories: ["kbar Strategy"]
 tags: ["R", "Kbar", "machine learning"]
-banner: ''
+banner: 'banners/image3.png'
 description: '
 市面上教K線的書多而又多，常常看到專家們指著某個型態就說這一定會漲，但到底是根據甚麼呢？
 其實K線不外乎就是由四個簡單的要素所組成：開盤價、最高價、最低價、收盤價，是反映價格走勢的一種圖線，藉由歷史的價格統計資料期許能預測行情走勢，而因其簡單易懂的特性，被廣泛應用在股票、期貨、貴金屬、數字貨幣等分析。'
-images: []
+images: ["images/screenshot.png"]
 menu: ''
 ---
 
@@ -18,14 +18,11 @@ menu: ''
 <hr>
 <div id="section" class="section level3">
 <h3>前言</h3>
-<p>市面上教K線的書多而又多，常常看到專家們指著某個型態就說這一定會漲，但到底是根據甚麼呢？<br>
+<p>市面上教K線的書多而又多，常常看到專家們說「抓住K線你就能獲利無限」，抑或是指著某個K棒型態就說這支股票一定會漲，但到底是根據甚麼呢？<br>
 其實K線不外乎就是由四個簡單的要素所組成：開盤價、最高價、最低價、收盤價，是反映價格走勢的一種圖線，藉由歷史的價格統計資料期許能預測行情走勢，而因其簡單易懂的特性，被廣泛應用在股票、期貨、貴金屬、數字貨幣等分析。</p>
 <hr>
 <p><br></p>
-</div>
-<div id="k" class="section level3">
-<h3>K棒交易策略</h3>
-<div id="k-1" class="section level4">
+<div id="k" class="section level4">
 <h4>K線</h4>
 <p>當收盤價&gt;開盤價，我們稱為紅K(陽線)；當收盤價&lt;開盤價，我們稱為黑K(陰線) <br>
 每一K線皆由<strong>「實體」</strong>和<strong>「影線」</strong>兩部份組成，實體比影線粗，影線依附於實體的上下兩端。其中實體部份記錄當天的開盤價和收盤價，影線部份則記錄當天的最高價和最低價。<br>
@@ -34,21 +31,25 @@ menu: ''
 <br>
 <hr>
 </div>
-<div id="k-2" class="section level4">
+<div id="k-1" class="section level4">
 <h4>K棒組合</h4>
 <ul>
 <li>以兩根或多根K棒組合做為股票進場的交易策略</li>
 </ul>
 <p>【多頭訊號】<br>
-<img src="1554816641037.jpg" style="width:50.0%" /></p>
+<img src="/banners/image2.png" style="width:50.0%" /></p>
 <p>【空頭訊號】<br>
-<img src="1554816584878.jpg" style="width:50.0%" /></p>
+<img src="C:/Users/Lenovo/Documents/R/WonderLand/content/post/1554816584878.jpg" style="width:50.0%" /></p>
 </div>
+</div>
+<div id="k-2" class="section level3">
+<h3>K棒交易策略</h3>
+<p><img src="/banners/image3.png" /></p>
 <div id="section-1" class="section level4">
 <h4>長紅吞噬回測實作</h4>
 <p>在投資領域中，技術分析線圖上常出現長紅吞噬的K棒組合，有些投資人認為這代表該檔股票未來會有一波多頭的走勢，原因是在第t天時一根紅K棒回補了前一天所有的損失，常被視為是股價要反轉的跡象。在這篇文章中，將以台灣上市公司的歷史股價資料，示範如何以R軟體來回測驗證這個交易想法。</p>
 <p>若回測的交易日出現常紅吞噬的K棒組合，則以隔日的開盤價進場，出場則是定在買進後任一時點損失超過10%時移動停損，以跌破當日的收盤價作為停損出場。</p>
-<p><img src="image1.png" style="width:10.0%" /></p>
+<p><img src="C:/Users/Lenovo/Documents/R/WonderLand/content/post/image1.png" style="width:10.0%" /></p>
 </div>
 <div id="k-3" class="section level4">
 <h4>判斷長紅吞噬K棒組合策略進場位置</h4>

@@ -65,11 +65,12 @@ pacman::p_load(magrittr)
 * 以兩根或多根K棒組合做為股票進場的交易策略
 
 【多頭訊號】<br>
-![](/banners/image2.png){width=50%}
+![](/banners/posk.png){width=50%}
+
 
 
 【空頭訊號】<br>
-![](C:/Users/Lenovo/Documents/R/WonderLand/content/post/1554816584878.jpg){width=50%}
+![](/banners/negk.png){width=50%}
 
 ### K棒交易策略
 
@@ -84,13 +85,16 @@ pacman::p_load(magrittr)
 若回測的交易日出現常紅吞噬的K棒組合，則以隔日的開盤價進場，出場則是定在買進後任一時點損失超過10%時移動停損，以跌破當日的收盤價作為停損出場。
 
 
-![](C:/Users/Lenovo/Documents/R/WonderLand/content/post/image1.png){width=10%}
-
-
-
 #### 判斷長紅吞噬K棒組合策略進場位置
-
-
+# ```{r results='hide', message=FALSE, warning=FALSE,echo=FALSE}
+# close > lagOpen1,
+# open < lagClose1,
+# close > open,
+# lagClose1 < lagOpen1,
+# kbar >= standardKbar*1,
+# lagkbar1 >= standardKbar*0.3,
+#          MA5vol>500 
+# ```
 
 ### 進階應用
 * 使用機器學習模型進行擇時交易策略提升策略績效

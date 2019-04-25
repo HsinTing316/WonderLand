@@ -37,9 +37,9 @@ menu: ''
 <li>以兩根或多根K棒組合做為股票進場的交易策略</li>
 </ul>
 <p>【多頭訊號】<br>
-<img src="/banners/image2.png" style="width:50.0%" /></p>
+<img src="/banners/posk.png" style="width:50.0%" /></p>
 <p>【空頭訊號】<br>
-<img src="C:/Users/Lenovo/Documents/R/WonderLand/content/post/1554816584878.jpg" style="width:50.0%" /></p>
+<img src="/banners/negk.png" style="width:50.0%" /></p>
 </div>
 </div>
 <div id="k-2" class="section level3">
@@ -49,12 +49,13 @@ menu: ''
 <h4>長紅吞噬回測實作</h4>
 <p>在投資領域中，技術分析線圖上常出現長紅吞噬的K棒組合，有些投資人認為這代表該檔股票未來會有一波多頭的走勢，原因是在第t天時一根紅K棒回補了前一天所有的損失，常被視為是股價要反轉的跡象。在這篇文章中，將以台灣上市公司的歷史股價資料，示範如何以R軟體來回測驗證這個交易想法。</p>
 <p>若回測的交易日出現常紅吞噬的K棒組合，則以隔日的開盤價進場，出場則是定在買進後任一時點損失超過10%時移動停損，以跌破當日的收盤價作為停損出場。</p>
-<p><img src="C:/Users/Lenovo/Documents/R/WonderLand/content/post/image1.png" style="width:10.0%" /></p>
 </div>
 <div id="k-3" class="section level4">
 <h4>判斷長紅吞噬K棒組合策略進場位置</h4>
 </div>
 </div>
+<div id="r-resultshide-messagefalse-warningfalseechofalse-close-lagopen1-open-lagclose1-close-open-lagclose1-lagopen1-kbar-standardkbar1-lagkbar1-standardkbar0.3-ma5vol500" class="section level1">
+<h1><code>{r results='hide', message=FALSE, warning=FALSE,echo=FALSE} # close &gt; lagOpen1, # open &lt; lagClose1, # close &gt; open, # lagClose1 &lt; lagOpen1, # kbar &gt;= standardKbar*1, # lagkbar1 &gt;= standardKbar*0.3, #          MA5vol&gt;500  #</code></h1>
 <div id="section-2" class="section level3">
 <h3>進階應用</h3>
 <ul>
@@ -69,5 +70,6 @@ menu: ''
 </ol>
 <br>
 <hr>
+</div>
 </div>
 </div>

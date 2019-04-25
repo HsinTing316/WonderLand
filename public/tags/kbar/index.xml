@@ -26,7 +26,7 @@ K線當收盤價&amp;gt;開盤價，我們稱為紅K(陽線)；當收盤價&amp
 【空頭訊號】
 K棒交易策略長紅吞噬回測實作在投資領域中，技術分析線圖上常出現長紅吞噬的K棒組合，有些投資人認為這代表該檔股票未來會有一波多頭的走勢，原因是在第t天時一根紅K棒回補了前一天所有的損失，常被視為是股價要反轉的跡象。在這篇文章中，將以台灣上市公司的歷史股價資料，示範如何以R軟體來回測驗證這個交易想法。
 若回測的交易日出現常紅吞噬的K棒組合，則以隔日的開盤價進場，出場則是定在買進後任一時點損失超過10%時移動停損，以跌破當日的收盤價作為停損出場。
-判斷長紅吞噬K棒組合策略進場位置進階應用使用機器學習模型進行擇時交易策略提升策略績效加入基本面因素篩股參考講義技術分析概論智能理財分析</description>
+判斷長紅吞噬K棒組合策略進場位置{r results=&#39;hide&#39;, message=FALSE, warning=FALSE,echo=FALSE} # close &amp;gt; lagOpen1, # open &amp;lt; lagClose1, # close &amp;gt; open, # lagClose1 &amp;lt; lagOpen1, # kbar &amp;gt;= standardKbar*1, # lagkbar1 &amp;gt;= standardKbar*0.3, # MA5vol&amp;gt;500 #進階應用使用機器學習模型進行擇時交易策略提升策略績效加入基本面因素篩股參考講義技術分析概論智能理財分析</description>
     </item>
     
   </channel>

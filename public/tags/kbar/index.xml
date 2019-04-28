@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Kbar on WonderLand</title>
-    <link>https://hsinblog.netlify.com/tags/kbar/</link>
+    <link>/tags/kbar/</link>
     <description>Recent content in Kbar on WonderLand</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 23 Apr 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://hsinblog.netlify.com/tags/kbar/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/kbar/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>K棒交易策略介紹</title>
-      <link>https://hsinblog.netlify.com/2019/04/23/kbarstrategy/</link>
+      <link>/2019/04/23/kbarstrategy/</link>
       <pubDate>Tue, 23 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://hsinblog.netlify.com/2019/04/23/kbarstrategy/</guid>
+      <guid>/2019/04/23/kbarstrategy/</guid>
       <description>前言市面上教K線的書多而又多，常常看到專家們說「抓住K線你就能獲利無限」，抑或是指著某個K棒型態就說這支股票一定會漲，但到底是根據甚麼呢？
 其實K線不外乎就是由四個簡單的要素所組成：開盤價、最高價、最低價、收盤價，是反映價格走勢的一種圖線，藉由歷史的價格統計資料期許能預測行情走勢，而因其簡單易懂的特性，被廣泛應用在股票、期貨、貴金屬、數字貨幣等分析。
 K線當收盤價&amp;gt;開盤價，我們稱為紅K(陽線)；當收盤價&amp;lt;開盤價，我們稱為黑K(陰線) 每一K線皆由「實體」和「影線」兩部份組成，實體比影線粗，影線依附於實體的上下兩端。其中實體部份記錄當天的開盤價和收盤價，影線部份則記錄當天的最高價和最低價。

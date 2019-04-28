@@ -1,5 +1,5 @@
 #baseurl = "https://example.org/"
-baseurl = "https://hsinblog.netlify.com/"
+baseurl = "/"
 languageCode = "en-us"
 title = "WonderLand"
 # Enable comments by entering your Disqus shortname

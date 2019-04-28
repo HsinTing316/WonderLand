@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on WonderLand</title>
-    <link>https://hsinblog.netlify.com/tags/</link>
+    <link>/tags/</link>
     <description>Recent content in Tags on WonderLand</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 23 Apr 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://hsinblog.netlify.com/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Kbar</title>
-      <link>https://hsinblog.netlify.com/tags/kbar/</link>
+      <link>/tags/kbar/</link>
       <pubDate>Tue, 23 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://hsinblog.netlify.com/tags/kbar/</guid>
+      <guid>/tags/kbar/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R</title>
-      <link>https://hsinblog.netlify.com/tags/r/</link>
+      <link>/tags/r/</link>
       <pubDate>Tue, 23 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://hsinblog.netlify.com/tags/r/</guid>
+      <guid>/tags/r/</guid>
       <description></description>
     </item>
     
     <item>
       <title>machine learning</title>
-      <link>https://hsinblog.netlify.com/tags/machine-learning/</link>
+      <link>/tags/machine-learning/</link>
       <pubDate>Tue, 23 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://hsinblog.netlify.com/tags/machine-learning/</guid>
+      <guid>/tags/machine-learning/</guid>
       <description></description>
     </item>
     

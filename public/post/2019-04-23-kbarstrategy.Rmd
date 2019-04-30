@@ -98,22 +98,28 @@ pacman::p_load(magrittr)
 
 ### K棒交易策略回測實作
 
+#### 【長紅吞噬】
 以下我們就會以**長紅吞噬**這個K棒型態，作為我們的進場條件，來進行交易策略的回測。<br>
 首先定義長紅吞噬K棒組合時間的發生點：
 
 ![](/banners/image2.png){width=50%}
 
-### 【長紅吞噬】
+
 在投資領域中，技術分析線圖上常出現長紅吞噬的K棒組合，有些投資人認為這代表該檔股票未來會有一波多頭的走勢，原因是在第t天時一根紅K棒回補了前一天所有的損失，常被視為是股價要反轉的跡象。在這篇文章中，將以2008年~2018年台灣上市公司的歷史股價資料，示範如何以R軟體來回測驗證這個交易想法。
 
 若回測的交易日出現長紅吞噬的K棒組合，則以隔日的開盤價進場，出場則是在收盤價跌破20日移動平均線時，以跌破當日的收盤價作為停損出場。
 
-
+首先我們先來看我們的調整後股價資料(adjStockPriceData)
+![](/banners/1556597719748.jpg)
 
 #### 判斷長紅吞噬K棒組合策略進場位置
+
 在寫交易策略之前，還有件很重要的事前準備，就是我們要先設定**標準K棒**
-因為在「長紅吞噬」的這項策略中，實體紅K和黑K棒的大小非常的重要，因此我們定義標準K棒為：
-前90天K棒絕對值大小的平均(而此處K棒大小的計算為收盤價/開盤價-1)
+因為在「長紅吞噬」的這項策略中，實體紅K和黑K棒的大小非常的重要，因此我們定義：<br>
+K棒大小的計算為 *收盤價/開盤價-1的絕對值* <br> 
+標準K棒為前90天K棒絕對值大小的移動平均 <br>
+
+
 ```{r eval = FALSE, message=FALSE, warning=FALSE,echo=TRUE}
 standardKdays <- 90      # 標準K棒平均日數
 kbar=abs(close/open-1)   # K棒絕對值大小
@@ -121,20 +127,20 @@ standardKbar=rollmean(x=kbar, k=standardKdays,fill=NA, align = "right")  # 計�
 ```
 
 再來是進場時K棒的設定: <br>
-* 第t天紅K大於標準K棒
-* 第t-1天黑K大於0.3倍標準K棒
-各位也可以自己去嘗試到底多大的K棒做出來績效最好
+* 第t天紅K大於標準K棒<br>
+* 第t-1天黑K大於0.3倍標準K棒<br>
+各位也可以自己去嘗試到底多大的K棒做出來績效最好<br>
 
 策略條件: <br>
-* 第t天收盤大於第t-1天開盤
-* 第t天開盤小於第t-1天收盤
-* 第t天為紅K、第t-1天為黑K
-* 前五天平均成交量都要大於500張
+* 第t天收盤大於第t-1天開盤<br>
+* 第t天開盤小於第t-1天收盤<br>
+* 第t天為紅K、第t-1天為黑K<br>
+* 前五天平均成交量都要大於500張<br>
 
 
 
-```{r eval = FALSE, message=FALSE, warning=FALSE,echo=TRUE}
-tradeTargetTable <- tradeTargetTable %>% 
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+tradeTargetTable <- adjStockPriceData %>% 
   mutate(
   close > lagOpen1,                  # 第t日收盤價 > 第t-1日開盤價
   open < lagClose1,                  # 第t日開盤價 < 第t-1日收盤價
@@ -147,12 +153,46 @@ tradeTargetTable <- tradeTargetTable %>%
 ```
 
 
+再來是出場條件：<br>
+* 收盤價跌破MA20 <br>
+* 以當天收盤價出場 <br>
+
+
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+outSiteTable <- adjStockPriceData %>%
+  mutate(outSite=ifelse((close<MA20)&(lag(close,1)>lag(MA20,1)),1,0)) %>%  
+  # 收盤價跌破MA60
+  filter(outSite==1) %>%
+  select(code, outDate=date, outPrice=close)%>%
+  group_by()
+```
+
+
+整理好進場位置表(tradeTargetTable)和出場位置表(outSiteTable)後，就可以整理策略的交易明細表。以迴圈進場位置表的方式，逐一尋找每個進場日後最近的出場日，並同時紀錄買進價格和賣出價格。
+
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+tradeDetailTable <- NULL
+for(ix in 1:nrow(tradeTargetTable)){
+  
+  inDate <- tradeTargetTable$inDate[ix]   # 進場日期
+  stockCode <- tradeTargetTable$code[ix]  # 股票代碼
+  outData <- outSiteTable %>%             # 該支股票代碼資料進場日之後的最近出場日
+    filter(code==stockCode, outDate>inDate) %>%
+    filter(row_number()==1) %>%
+    select(outDate, outPrice)
+  if(nrow(outData)>0){
+    tradeDetailTable <- bind_rows(tradeDetailTable, bind_cols(tradeTargetTable[ix,], outData))
+  }
+}
+```
+
+#### 長紅吞噬K棒組合策略績效分析
 
 
 ### 進階應用
-* 使用機器學習模型進行擇時交易策略提升策略績效
+* 加入停損停利概念與籌碼面資料
 * 加入基本面因素篩股
-
+* 使用機器學習模型進行擇時交易策略提升策略績效
 
 #### 參考講義
 1. 技術分析概論

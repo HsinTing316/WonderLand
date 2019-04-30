@@ -1,5 +1,5 @@
 ---
-date: "2019-04-26 "
+date: "2019-04-26"
 disable_comments: true
 menu: main
 title: About

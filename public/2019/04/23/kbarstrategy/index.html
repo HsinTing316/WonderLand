@@ -37,7 +37,7 @@
 
 <meta itemprop="datePublished" content="2019-04-23T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-04-23T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="185">
+<meta itemprop="wordCount" content="282">
 
   <meta itemprop="image" content="/images/screenshot.png">
 
@@ -278,10 +278,10 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-04-23 00:00:00 &#43;0000 UTC" itemprop="datePublished">2019-04-23</time>
             &middot;
-            185
+            282
             words
             &middot;
-            1
+            2
             minute read
         </div>
         
@@ -379,7 +379,7 @@
 <p><img src="/banners/image2.png" style="width:50.0%" /></p>
 <p>在投資領域中，技術分析線圖上常出現長紅吞噬的K棒組合，有些投資人認為這代表該檔股票未來會有一波多頭的走勢，原因是在第t天時一根紅K棒回補了前一天所有的損失，常被視為是股價要反轉的跡象。在這篇文章中，將以2008年~2018年台灣上市公司的歷史股價資料，示範如何以R軟體來回測驗證這個交易想法。</p>
 <p>若回測的交易日出現長紅吞噬的K棒組合，則以隔日的開盤價進場，出場則是在收盤價跌破20日移動平均線時，以跌破當日的收盤價作為停損出場。</p>
-<p>首先我們先來看我們的調整後股價資料(adjStockPriceData)
+<p>首先我們先來看我們的調整後股價資料(adjStockPriceData) <br>
 <img src="/banners/1556597719748.jpg" /></p>
 </div>
 <div id="k-4" class="section level4">
@@ -391,15 +391,19 @@ K棒大小的計算為 <em>收盤價/開盤價-1的絕對值</em> <br>
 <pre class="r"><code>standardKdays &lt;- 90      # 標準K棒平均日數
 kbar=abs(close/open-1)   # K棒絕對值大小
 standardKbar=rollmean(x=kbar, k=standardKdays,fill=NA, align = &quot;right&quot;)  # 計算標準K棒值</code></pre>
-<p>再來是進場時K棒的設定: <br>
-* 第t天紅K大於標準K棒<br>
-* 第t-1天黑K大於0.3倍標準K棒<br>
-各位也可以自己去嘗試到底多大的K棒做出來績效最好<br></p>
-<p>策略條件: <br>
-* 第t天收盤大於第t-1天開盤<br>
-* 第t天開盤小於第t-1天收盤<br>
-* 第t天為紅K、第t-1天為黑K<br>
-* 前五天平均成交量都要大於500張<br></p>
+<p>再來是進場時K棒的設定:</p>
+<ul>
+<li>第t天紅K大於標準K棒<br></li>
+<li>第t-1天黑K大於0.3倍標準K棒<br>
+各位也可以自己去嘗試到底多大的K棒做出來績效最好<br></li>
+</ul>
+<p>策略條件:</p>
+<ul>
+<li>第t天收盤大於第t-1天開盤<br></li>
+<li>第t天開盤小於第t-1天收盤<br></li>
+<li>第t天為紅K、第t-1天為黑K<br></li>
+<li>前五天平均成交量都要大於500張<br></li>
+</ul>
 <pre class="r"><code>tradeTargetTable &lt;- adjStockPriceData %&gt;% 
   mutate(
   close &gt; lagOpen1,                  # 第t日收盤價 &gt; 第t-1日開盤價
@@ -410,12 +414,14 @@ standardKbar=rollmean(x=kbar, k=standardKdays,fill=NA, align = &quot;right&quot;
   lagkbar1 &gt;= standardKbar*0.3,      # 第t-1日K棒大小 &gt;= 標準K棒的0.3倍
   MA5vol&gt;500                         # 前五日平均交易量大於500張
   )</code></pre>
-<p>再來是出場條件：<br>
-* 收盤價跌破MA20 <br>
-* 以當天收盤價出場 <br></p>
+<p>再來是出場條件：</p>
+<ul>
+<li>收盤價跌破MA20 <br></li>
+<li>以當天收盤價出場 <br></li>
+</ul>
 <pre class="r"><code>outSiteTable &lt;- adjStockPriceData %&gt;%
   mutate(outSite=ifelse((close&lt;MA20)&amp;(lag(close,1)&gt;lag(MA20,1)),1,0)) %&gt;%  
-  # 收盤價跌破MA60
+  # 收盤價跌破MA20
   filter(outSite==1) %&gt;%
   select(code, outDate=date, outPrice=close)%&gt;%
   group_by()</code></pre>
@@ -436,6 +442,59 @@ for(ix in 1:nrow(tradeTargetTable)){
 </div>
 <div id="k-5" class="section level4">
 <h4>長紅吞噬K棒組合策略績效分析</h4>
+<p>整理好策略在回測期間內每筆交易的進場價格和出場價格，就可以計算每次交易的報酬率。
+此處我們設定交易成本為</p>
+<pre class="r"><code>buyCost &lt;- 0.001425    #買進的交易成本(手續費)
+sellCost &lt;- 0.004425   #賣出的交易成本(手續費&amp;交易稅)</code></pre>
+<p><br>
+報酬率算法為：</p>
+<p>ret = <span class="math inline">\(\frac{( outPrice * (1 - sellCost))}{(inPrice * (1 + buyCost))} - 1\)</span></p>
+<p><br></p>
+<p>除了報酬率以外，也需要觀察這個策略每次交易持有部位日數。
+要計算日期的加減，我們需要先設定日期轉換函數，之後只要直接將兩個日期相減即可自動計算日數差距。</p>
+<pre class="r"><code>DateConvert &lt;- function(x){
+  return(as.Date(paste(substring(x,1,4),substring(x,5,6),substring(x,7,8),sep=&quot;-&quot;,format=&quot;%Y%m%d&quot;)))
+}
+tradeDetailTable$holdDays &lt;- as.numeric(DateConvert(tradeDetailTable$outDate)-DateConvert(tradeDetailTable$inDate))</code></pre>
+<p><br></p>
+<p>計算報酬率和每次交易持有部位日數的交易明細表如下所示：</p>
+<p><img src="/banners/1556611938585.jpg" /></p>
+<p>接下來可以分析長紅吞噬K棒組合交易策略應用在台灣股票的歷史績效表現。
+策略績效表現衡量的指標，大致上有：</p>
+<ul>
+<li>平均報酬率</li>
+<li>勝率</li>
+<li>交易次數</li>
+<li>報酬率標準差</li>
+<li>最大報酬率</li>
+<li>最小報酬率</li>
+<li>平均持有日數</li>
+</ul>
+<p>上述的績效指標在程式中的寫法如下：</p>
+<pre class="r"><code># 平均報酬率
+meanRet &lt;- mean(tradeDetailTable$ret)
+# 報酬率標準差
+sdRet &lt;- sd(tradeDetailTable$ret)
+# 交易次數
+tradeNums &lt;- nrow(tradeDetailTable)
+# 勝率
+winRatio &lt;- sum(as.numeric(tradeDetailTable$ret&gt;0))/tradeNums
+# 最大報酬率
+maxRet &lt;- max(tradeDetailTable$ret)
+# 最小報酬率
+minRet &lt;- min(tradeDetailTable$ret)
+# 平均持有期間日數
+avgHoldDays &lt;- mean(tradeDetailTable$holdDays)</code></pre>
+<p>計算好上述的績效指標後，可以整理成一個簡單的績效結果報表。</p>
+<pre class="r"><code># 輸出結果
+cat(paste0(&quot;*********策略回測績效*********\n&quot;,
+           &quot;平均報酬率: &quot;,round(meanRet*100,2),&quot; %\n&quot;,
+           &quot;交易次數: &quot;,tradeNums,&quot; 次\n&quot;,
+           &quot;勝率: &quot;,round(winRatio*100,2),&quot; %\n&quot;,
+           &quot;報酬率標準差: &quot;,round(sdRet*100,2),&quot; %\n&quot;,
+           &quot;最大報酬率: &quot;,round(maxRet*100,2),&quot; %\n&quot;,
+           &quot;最小報酬率: &quot;,round(minRet*100,2),&quot; %\n&quot;,
+           &quot;平均持有日數: &quot;,round(avgHoldDays,2),&quot;天\n&quot;,</code></pre>
 </div>
 </div>
 <div id="section-2" class="section level3">
